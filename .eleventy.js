@@ -1,9 +1,14 @@
+const yaml = require("js-yaml");
 const { DateTime } = require("luxon");
 const markdownIt = require("markdown-it");
 
 module.exports = function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy("css");
     eleventyConfig.addPassthroughCopy("media");
+
+    // Add YAML data files
+    eleventyConfig.addDataExtension('yaml', contents => yaml.safeLoad(contents))
+    eleventyConfig.addDataExtension('yml', contents => yaml.safeLoad(contents))
 
 	// Filters
 	eleventyConfig.addFilter("readableDate", (dateObj, format, zone) => {
