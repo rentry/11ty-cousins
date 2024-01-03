@@ -1,6 +1,6 @@
 ---
-title: Diffrent post
-date: 2022-08-28T10:56:40.093Z
+title: Post one
+date: 2024-01-01
 tags:
   - post
 ---
