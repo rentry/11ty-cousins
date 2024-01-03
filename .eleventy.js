@@ -5,9 +5,16 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy("css");
     eleventyConfig.addPassthroughCopy("media");
 
-    eleventyConfig.addFilter("formatDate", (dateObj) => {
-        return DateTime.fromJSDate(dateObj).toISODate();
-    });     
+	// Filters
+	eleventyConfig.addFilter("readableDate", (dateObj, format, zone) => {
+		// Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
+		return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(format || "DDD");
+	});
+
+	eleventyConfig.addFilter('htmlDateString', (dateObj) => {
+		// dateObj input: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
+		return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat('yyyy-LL-dd');
+	});
 
     let markdownOptions = {
         html: true,
